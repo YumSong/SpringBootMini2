@@ -20,7 +20,7 @@
             <p class="tip">邮箱或密码不正确！</p>
         </div>
         <div class="form-item">
-            <button onclick="log();">登录账号</button>
+            <button onclick="login();">登录账号</button>
         </div>
         <div class="reg-bar">
 
@@ -41,9 +41,8 @@
     }
     validateClick();
 
-    function log() {
+    function login() {
         let param = $("#logForm").toJson();
-        console.info(param);
         sqlrunner.sel("SUserDao.selectByUsername", param, function (data) {
             if ("S1000" !== data.code) {
                 alert("数据加载异常，请重试或联系管理员");
@@ -55,8 +54,13 @@
                 //  localStorage 浏览器存放数据的地方，以key-value键值对的形式存在
                 //  登录之后将用户信息存放到localStorage，表明这个用户已经登录了
                 localStorage.setItem("user", user);
-                //  页面的跳转到sy的页面
-                location.href = "sy.html"
+                // admin admin
+                //  如果是用户登录的是admin，然后跳到后台管理, 否则跳到sy.html
+                if ('admin' === rows[0].username && 'admin' === rows[0].password) {
+                    $(location).attr('href', 'admin/index.html');
+                } else {
+                    location.href = "sy.html";
+                }
             } else {
                 alert("用户名或密码错误");
             }

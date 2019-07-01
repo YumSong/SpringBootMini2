@@ -1,0 +1,151 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+li {
+    list-style: none;
+}
+
+div.header {
+    background-color: #698b69;
+    height: 44px;
+}
+
+li.headerInner {
+    color: white;
+    float: left;
+    line-height: 44px;
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 118px;
+    cursor: pointer;
+}
+
+li.headerInner:hover {
+    color: grey;
+    transition-duration: 1s;
+}
+
+
+li.h1 {
+
+    width: 100%;
+    height: 850px;
+    overflow: hidden;
+    padding-top: 2px;
+}
+
+.banner {
+    position: absolute;
+    width: 100%;
+    height: 850px;
+}
+
+.imgList {
+    width: 100%;
+    height: 850px;
+}
+
+.wrapper {
+    width: 100%;
+    height: 850px;
+    position: absolute;
+
+}
+
+.innerimg {
+    float: left;
+    height: 850px;
+    width: 100%;
+    position: absolute;
+}
+
+.innera {
+    position: absolute;
+    height: 850px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.index {
+    height: 850px;
+    width: 100%;
+    position: absolute;
+    top: 450px;
+    z-index: 10;
+    left: 50%;
+}
+
+.on {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+li.h2 {
+
+    margin-top: 800px;
+    margin-left: -175px;
+    overflow: hidden;
+    width: 1519px;
+    height: 666px;
+    position: relative;
+    background-position: center;
+}
+
+li.h3 {
+    width: 1920px;
+    height: 952px;
+    margin-top: -112px;
+    margin-left: -175px;
+    overflow: hidden;
+    position: relative;
+}
+
+li.h5 {
+    width: 1519px;
+    height: 1080px;
+    overflow: hidden;
+    background-image: url(../../images/4.gif);
+    no-repeat: fixed center center;
+    font-size: 0;
+    background-attachment: fixed;
+    margin-top: -200px;
+    text-align: center;
+    background-position: center;
+}
+
+li.h4 {
+    width: 1920px;
+    height: 1614px;
+    margin-top: -112px;
+    margin-left: -175px;
+    overflow: hidden;
+    position: relative;
+    background-position: center;
+}
+
+li.h6 {
+
+    margin-top: 1px;
+    margin-left: -175px;
+    overflow: hidden;
+    position: relative;
+    background-position: center;
+}
+
+li.h7 {
+
+    margin-top: 12px;
+    margin-left: 175px;
+    overflow: hidden;
+    position: relative;
+    background-position: center;
+}
+

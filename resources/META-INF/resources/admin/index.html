@@ -17,13 +17,7 @@
             <div class="menu">
                 <ul class="menu-list">
                     <li class="list">
-                        <div class="list-one"><div class="img1"></div><span>系统首页</span></div>
-                        <!-- 二级菜单1 -->
-                        <ul>
-                        	<li onclick="openUrl('hello.html')">测试1</li>
-                            <li onclick="openUrl('http://www.baidu.com')">百度</li>
-                            <li onclick="openUrl('http://www.qq.com')">腾讯</li>
-                        </ul>
+                        <div class="list-one"><div class="img1"></div><span onclick="openUrl('hello.html')">系统首页</span></div>
                     </li>
 
                     <li class="list">
@@ -64,9 +58,9 @@
                 <div class="right-head-nav rp fr">
                     <ul class="right-head-nav-list">
                         <li><img src="images/head.jpg"></li>
-                        <li><span>赵子龙</span></li>
+                        <li><span>管理员</span></li>
                         <li><img src="images/tip.png"></li>
-                        <li><span>退出</span></li>
+                        <li><span onclick="logout()">退出</span></li>
                     </ul>
                     <!-- 弹窗 -->
                     <ul class="alert-window ap">
@@ -83,6 +77,19 @@
     <div style="clear:both;"></div>
     <script src="../common/js/jquery-3.4.1.min.js"> </script>
     <script src="js/index.js"></script>
+    <script>
+        function checkUser() {
+            if (!localStorage.getItem("user")) {
+                alert('请先登录后在进来这个页面');
+                location.href="../login.html";
+            }
+        }
+        checkUser();
+        function logout(){
+            localStorage.removeItem("user");
+            location.href="../login.html";
+        }
+    </script>
 </body>
 
 </html>
