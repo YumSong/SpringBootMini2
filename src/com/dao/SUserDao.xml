@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.SUserDao">
+	<sql id="all">
+		id,username,password
+	</sql>
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		insert
+		into s_user(username,password)
+		values(#{username},#{password})
+	</insert>
+	<delete id="delete">
+		delete from s_user where id =
+		#{id}
+	</delete>
+	<update id="update">
+		update s_user
+		<set>
+			username = #{username} ,
+			password =
+			#{password}
+		</set>
+		where id = #{id}
+	</update>
+
+	<select id="selectAll" resultType="java.util.HashMap">
+		select
+		<include refid="all"></include>
+		from s_user
+	</select>
+
+	<select id="select" useCache="true"
+		resultType="java.util.HashMap">
+		select
+		<include refid="all"></include>
+		from s_user
+		<where>
+			<if test="id !=null">
+				and id = #{id}
+			</if>
+			<if test="username !=null and username != ''">
+				and username like concat(concat('%',#{username}),'%')
+			</if>
+		</where>
+	</select>
+	<select id="selectByUsername" resultType="java.util.HashMap">
+		select
+		<include refid="all"></include>
+		from s_user
+		where username = #{username} and password = #{password}
+	</select>
+
+
+</mapper>

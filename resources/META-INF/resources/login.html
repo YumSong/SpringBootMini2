@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>欢迎登陆我的世界</title>
+
+</head>
+<body>
+<div class="dowebok">
+    <form id="logForm" onsubmit="return false;">
+        <div class="logo"></div>
+        <div class="form-item">
+            <input name="username" type="text" autocomplete="off" placeholder=" 用户名：">
+            <p class="tip">请输入合法的邮箱地址！</p>
+        </div>
+        <div class="form-item">
+            <input name="password" type="password" autocomplete="off" placeholder=" 密码：">
+            <p class="tip">邮箱或密码不正确！</p>
+        </div>
+        <div class="form-item">
+            <button onclick="log();">登录账号</button>
+        </div>
+        <div class="reg-bar">
+
+            <a class="reg" href="reg.html">没账号？点击注册</a>
+
+            <a class="forget" href="javascript:">忘记密码</a>
+        </div>
+    </form>
+</div>
+<script src="common/js/jquery-3.4.1.min.js"></script>
+<script src="common/js/utils.js"></script>
+<script>
+    function validateClick() {
+        ('#input').val('')
+        ('#submit').on('click', function () {
+            ('.tip').show()
+        })
+    }
+    validateClick();
+
+    function log() {
+        let param = $("#logForm").toJson();
+        console.info(param);
+        sqlrunner.sel("SUserDao.selectByUsername", param, function (data) {
+            if ("S1000" !== data.code) {
+                alert("数据加载异常，请重试或联系管理员");
+            }
+            let rows = data.rows;
+            if (rows.length > 0) {
+                //登陆成功后跳转
+                let user = JSON.stringify(rows[0]);
+                //  localStorage 浏览器存放数据的地方，以key-value键值对的形式存在
+                //  登录之后将用户信息存放到localStorage，表明这个用户已经登录了
+                localStorage.setItem("user", user);
+                //  页面的跳转到sy的页面
+                location.href = "sy.html"
+            } else {
+                alert("用户名或密码错误");
+            }
+        });
+    }
+
+</script>
+
+</body>
+</html>

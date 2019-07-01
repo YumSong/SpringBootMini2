@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/index.css">
+    <title>后台</title>
+</head>
+
+<body>
+    <div>
+        <!-- 左边部分 -->
+        <div id="left-part" class="fl">
+            <img src="images/logo.png">
+            <div class="menu">
+                <ul class="menu-list">
+                    <li class="list">
+                        <div class="list-one"><div class="img1"></div><span>系统首页</span></div>
+                        <!-- 二级菜单1 -->
+                        <ul>
+                        	<li onclick="openUrl('hello.html')">测试1</li>
+                            <li onclick="openUrl('http://www.baidu.com')">百度</li>
+                            <li onclick="openUrl('http://www.qq.com')">腾讯</li>
+                        </ul>
+                    </li>
+
+                    <li class="list">
+                        <div class="list-one"><div class="img2"></div><span>用户管理</span></div>
+                        <!-- 二级菜单2 -->
+                        <ul>
+                            <li onclick="openUrl('../add.html')">用户添加</li>
+                            <li onclick="openUrl('../grid.html')">用户列表</li>
+                        </ul>
+                    </li>
+
+                    <li class="list">
+                        <div class="list-one"><div class="img3"></div><span>表单管理</span></div>
+                        <!-- 二级菜单3 -->
+                        <ul>
+                            <li>表单管理1</li>
+                            <li>表单管理2</li>
+                            <li>表单管理3</li>
+                        </ul>
+                    </li>
+
+                    <li class="list">
+                        <div class="list-one"><div class="img4"></div><span>其他管理</span></div>
+                        <!-- 二级菜单4 -->
+                        <ul>
+                            <li>其他管理1</li>
+                            <li>其他管理2</li>
+                            <li>其他管理3</li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <!-- 右边部分 -->
+        <div id="right-part">
+            <div class="right-head">
+                <div class="right-head-nav rp fr">
+                    <ul class="right-head-nav-list">
+                        <li><img src="images/head.jpg"></li>
+                        <li><span>赵子龙</span></li>
+                        <li><img src="images/tip.png"></li>
+                        <li><span>退出</span></li>
+                    </ul>
+                    <!-- 弹窗 -->
+                    <ul class="alert-window ap">
+                        <li onclick="openUrl('hello.html')">个人信息</li>
+                        <li onclick="openUrl('hello.html')">修改密码</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="right-content-bg">
+                    <iframe id="ifr" scrolling="auto" frameborder="0" src="hello.html" style="width:100%;height:100%;"></iframe>
+            </div>
+        </div>
+    </div>
+    <div style="clear:both;"></div>
+    <script src="../common/js/jquery-3.4.1.min.js"> </script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>

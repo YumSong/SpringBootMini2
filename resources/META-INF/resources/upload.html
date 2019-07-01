@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>upload</title>
+<script type="text/javascript" src="common/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="common/js/utils.js"></script>
+<script>
+	function uploadImg(t, imgId, call) {
+		if (t.files.length < 1) {
+			return;
+		}
+		var formData = new FormData();
+		formData.append('file', t.files[0]);
+		$.ajax({
+			url : "uploadFile",
+			type : "post",
+			data : formData,
+			dataType : "json",
+			contentType : false,
+			processData : false,
+			mimeType : "multipart/form-data",
+			success : function(data) {
+				$("#" + imgId).attr("src", "visit/" + data.data);
+				var i = $(t).next("input[name=" + t.name + "]");
+				if (i.length == 0) {
+					var a = $('<input type="hidden"/>').attr("name", t.name).attr("value", data.data);
+					$(t).after(a);
+				} else {
+					i.attr("value", data.data);
+				}
+				if (call) {
+					call(data, t);
+				}
+			},
+			error : function(data) {
+				alert("上传异常");
+			}
+		});
+	}
+</script>
+</head>
+<body>
+
+	<form id="frm">
+		<img id="img1" style="width:200px;height:200px;" /> 
+		<input type="file" onchange="uploadImg(this,'img1','imgName1');" /><br />
+		<img id="img2" style="width:200px;height:200px;" /> 
+		<input type="file" onchange="uploadImg(this,'img2','imgName2');" /><br />
+		<img id="img3" style="width:200px;height:200px;" /> 
+		<input type="file" onchange="uploadImg(this,'img3','imgName3');" />
+	</form>
+</body>
+</html>

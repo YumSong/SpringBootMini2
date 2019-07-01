@@ -1,0 +1,175 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+ 
+ li{
+	list-style: none;
+}
+
+div.header{
+	background-color:#698b69;
+	height: 44px;
+	padding-top: 2px;
+cursor: pointer;
+}
+ 
+li.headerInner{
+	color: white;
+	float: left;
+	line-height: 44px;
+	font-size: 14px;
+	font-weight:500;
+	margin-left: 150px;
+	cursor: pointer;
+	padding-top: 2px;
+}
+li.headerInner:hover{
+	color: grey;
+	transition-duration: 1s;
+}
+
+
+
+ .hh1{
+ 	width: 430px;
+ 	height:430px;
+ 	margin-top: 28px;
+ 	 margin-left:100px ;
+ 	 cursor: pointer;
+   overflow: hidden;
+    position: relative;
+  transition-duration:  1s;
+
+ }
+.hh1:hover{
+  transform: scale(1.1);
+  transition-duration:  1s;
+}
+
+  li.wz{
+  	color: #c00;
+  	font-size: 23px;
+  	margin-top: 15px;
+  	margin-left: 270px;
+
+  }
+ div.h2{
+ 	width: 430px;
+ 	height:430px;
+ 	margin-top:-475px;
+ 	margin-left:550px ;
+ 	overflow: hidden;
+ 	cursor: pointer;
+  position: relative;
+  transition-duration:  1s;
+ }
+.h2:hover{
+  transform: scale(1.1);
+  transition-duration:  1s;
+}
+ li.wz1{
+  	color: #c00;
+  	font-size: 23px;
+  	margin-top: 15px;
+  	margin-left: 712px;
+
+  }
+    div.h3{
+ 	width: 430px;
+ 	height:430px;
+ 	margin-top:-475px;
+ 	 margin-left:1005px ;
+ 	 cursor: pointer;
+   position: relative;
+  transition-duration:  1s;
+ }
+    .h3:hover{
+       transform: scale(1.1);
+  transition-duration:  1s;
+    }
+
+    li.wz2{
+  	color: #c00;
+  	font-size: 23px;
+  	margin-top: 15px;
+  	margin-left: 1180px;
+
+  }
+
+   div.h4{
+ 	width: 430px;
+ 	height:430px;
+ 	padding-top: 145px;
+ 	 cursor: pointer;
+ 	margin-left:100px ;
+ }
+li.wz3{
+  	color: #c00;
+  	font-size: 23px;
+  	margin-top: 15px;
+  	margin-left: 270px;
+  	
+  }
+  .h4:hover{
+       transform: scale(1.1);
+  transition-duration:  1s;
+    }
+
+    div.h5{
+ 	width: 430px;
+ 	height:430px;
+ 	margin-top:-470px;
+ 	margin-left:550px ;
+ 	 
+ 	cursor: pointer;
+ }
+li.wz4{
+  	color: #c00;
+  	font-size: 23px;
+  	margin-top: 15px;
+  	margin-left: 712px;
+
+  }
+  .h5:hover{
+       transform: scale(1.1);
+  transition-duration:  1s;
+    }
+
+    div.h6{
+ 	width: 430px;
+ 	height:430px;
+ 	margin-top:-475px;
+ 	 margin-left:1005px ;
+ 	 cursor: pointer;
+ 	 padding-bottom: 520px;
+ }
+li.wz5{
+  	color: #c00;
+  	font-size: 23px;
+  	margin-top: -500px;
+  	margin-left: 1180px;
+position: absolute;
+  }
+  .h6:hover{
+       transform: scale(1.1);
+  transition-duration:  1s;
+    }
+
+
+
+div.h7{
+  margin-top:-370px; 
+  
+ 
+       }
+
+ li.h8{
+	 margin-top:12px;
+ margin-left: 175px;
+overflow: hidden;
+ position: relative;
+background-position: center;
+		   }
+
+ 

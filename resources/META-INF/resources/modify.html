@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="common/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="common/js/vue.js"></script>
+<script type="text/javascript" src="common/js/utils.js"></script>
+<script>
+	$(function() {
+		var _id = getQueryString("id");
+		sqlrunner.sel("SUserDao.select", {
+			id : _id
+		}, function(data) {
+			if ("S1000" != data.code) {
+				alert("数据加载异常，请重试或联系管理员");
+			}
+			console.info(data);
+			$("#frm").fromJson(data.rows[0])
+		});
+	});
+	function save() {
+		var json = $("#frm").toJson();
+		sqlrunner.upd("SUserDao.update", json, function(data) {
+			if ("S1000" != data.code) {
+				alert("数据加载异常，请重试或联系管理员");
+			}
+			alert("保存成功");
+		});
+	}
+</script>
+</head>
+<body>
+
+	<form id="frm">
+		<input type="hidden" name="id" /> 用户名：<input type="text"
+			name="username" /><br /> 密码：<input type="text" name="password" /><br />
+		<a href="javascript:void(0);" onclick="save();" />提交</a>
+		<a href="grid.html">返回列表</a>
+	</form>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+ 
+ li{
+	list-style: none;
+}
+
+div.header{
+	background-color:#698b69;
+	height: 44px;
+	padding-top: 2px;
+cursor: pointer;
+}
+ 
+li.headerInner{
+	color: white;
+	float: left;
+	line-height: 44px;
+	font-size: 14px;
+	font-weight:500;
+	margin-left: 150px;
+	cursor: pointer;
+	padding-top: 2px;
+}
+li.headerInner:hover{
+	color: grey;
+	transition-duration: 1s;
+}
+
+ 

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.GoodsMapper">
+	<insert id="insert">
+    <![CDATA[
+        insert into g_goods (
+        	p_name ,
+        	p_desc ,
+        	p_img ,
+        	p_price ,
+        	p_del 
+        ) values (
+        	#{pName} ,
+        	#{pDesc} ,
+        	#{pImg} ,
+        	#{pPrice} ,
+        	#{pDel}
+        )
+    ]]>
+	</insert>
+
+	<select id="select" resultType="java.util.HashMap">
+		select id ,
+		p_name ,
+		p_desc ,
+		p_img ,
+		p_price ,
+		p_del
+		from g_goods
+		<where>
+			<if test="id !=null and id != ''">
+				and id = #{id}
+			</if>
+			<if test="pName !=null and pName != ''">
+				and username like concat(concat('%',#{pName}),'%')
+			</if>
+		</where>
+	</select>
+
+
+</mapper>
+

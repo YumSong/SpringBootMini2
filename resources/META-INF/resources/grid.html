@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="common/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="common/js/vue.js"></script>
+<script type="text/javascript" src="common/js/utils.js"></script>
+<script>
+	$(function() {
+		var grid = loadGrid("grid", "SUserDao.select");
+		grid.remove = function(_id) {
+			console.info(_id);
+			sqlrunner.del("SUserDao.delete", {
+				id : _id
+			}, function(data) {
+				if ("S1000" != data.code) {
+					alert("数据加载异常，请重试或联系管理员");
+				}
+				alert("删除成功");
+				grid.loadData();
+			});
+		}
+	});
+</script>
+</head>
+<body>
+	<a href="add.html">添加</a>
+	<div id="grid">
+		<table>
+			<tr>
+				<td>username</td>
+				<td><input type="text" v-model="query.username" /></td>
+				<td @click="loadData();"><button>query</button>
+				<td>
+			</tr>
+		</table>
+		<table>
+			<tr>
+				<td>编号</td>
+				<td>用户名</td>
+			</tr>
+			<tr v-for="r in rows">
+				<td>{{r.id}}</td>
+				<td>{{r.username}}</td>
+				<td><a :href="'modify.html?id='+r.id">编辑</a></td>
+				<td><a href="javascript:void(0);" @click="remove(r.id)">删除</a></td>
+			</tr>
+		</table>
+		<table>
+			<tr>
+				<td v-show="page.curPage != 1" @click="pre();"><button>上一页</button></td>
+				<td v-for="i in page.btns" @click="loadData(i);"><button
+						:disabled="page.curPage==i">{{i}}</button></td>
+				<td v-show="page.curPage != page.pageTotal" @click="next();"><button>下一页</button></td>
+			</tr>
+		</table>
+		<div>
+</body>
+</html>

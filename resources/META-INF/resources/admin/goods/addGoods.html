@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>添加商品</title>
+<script type="text/javascript" src="../../common/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="../../common/js/vue.js"></script>
+<script type="text/javascript" src="../../common/js/utils.js"></script>
+<script>
+	function save() {
+		var json = $("#frm").toJson();
+		sqlrunner.ins("GoodsMapper.insert", json, function(data) {
+			if ("S1000" != data.code) {
+				alert("数据加载异常，请重试或联系管理员");
+			}
+			alert("保存成功");
+		});
+	}
+</script>
+</head>
+<body>
+	<h2>商品信息</h2>
+	<form id="frm">
+		名称：<input type="text" name="pName" /><br /> 
+		描述：<textarea name="pDesc" rows="3" cols="19"></textarea><br /> 
+		价格：<input type="text" name="pPrice" /><br /> 
+		<img id="img1" style="width:200px;height:200px;" /> 
+		<input type="file" onchange="uploadImg(this,'img1','pImg');" /><br />
+		<input type="hidden" name="pDel" value="0"/><br /> 
+		<a href="javascript:void(0);" onclick="save();" />提交</a> <a href="grid.html">返回列表</a>
+	</form>
+
+</body>
+</html>

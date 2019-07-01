@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>欢迎注册旗袍小屋</title>
+
+</head>
+<body>
+<div class="dowebok">
+    <form id="regFrm" onsubmit="return false">
+        <div class="logo"></div>
+        <div class="form-item">
+            <input id="username" name="username" type="text" autocomplete="off" placeholder="请输入qq账号或邮箱作用户名：">
+            <p class="tip">请输入正确格式用户名！</p>
+        </div>
+        <div class="form-item">
+            <input id="password" name="password" type="password" autocomplete="off" placeholder="设置密码：">
+            <p class="tip">请输入正确格式密码！</p>
+        </div>
+        <!--    添加onclick事件，调用registerUser，传输用户名，密码到后台注册    -->
+        <div class="form-item"><button id="submit" onclick="registerUser()">注册账号</button></div>
+        <div class="reg-bar">
+            <a class="reg" href="sy.html">回到首页</a>
+
+            <a class="forget" href="login.html">跳转登陆>>></a>
+        </div>
+    </form>
+    <span></span>
+</div>
+<script src="common/js/jquery-3.4.1.min.js"></script>
+<script src="common/js/utils.js"></script>
+<script>
+    (function () {
+        ('input').val('')
+        ('#submit').on('click', function () {
+            ('.tip').show()
+        })
+    });
+    function registerUser() {
+        $.ajax({
+            url: '/demo/sqlrunner/insert/SUserDao/insert',
+            type: 'POST',
+            cache: false,
+            data: new FormData($('#regFrm')[0]),
+            processData: false,
+            contentType: false
+        }).done(function(res) {
+            if ("S1000" != res.code) {
+                alert("数据加载异常，请重试或联系管理员");
+            } else {
+                alert("注册成功");
+                //   跳转到登录
+                $(location).attr('href', '/demo/login.html');
+            }
+
+        }).fail(function(res) {
+            alert('注册失败: ' + res);
+        });
+    }
+</script>
+</body>
+</html>
