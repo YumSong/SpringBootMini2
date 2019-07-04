@@ -203,11 +203,11 @@ $(function () {
 
     //确定按钮，移除商品
     $('.dialog-sure').click(function () {
-        const selectGoodsName = $order_lists.children('.list_con').children('.list_text').children('a').html();
+        const selectGoodsName = $order_lists.children('.list_con').children('.list_text').html();
         $order_lists.remove();
         let goodsItems = JSON.parse(localStorage.getItem('goodsItemArray'));
-        let i = 0;
         const result = goodsItems.filter( goodsItem => goodsItem.goodsname !== selectGoodsName);
+        console.log(result);
         localStorage.setItem('goodsItemArray', JSON.stringify(result));
         if ($order_content.html().trim() == null || $order_content.html().trim().length === 0) {
             $order_content.parents('.cartBox').remove();
@@ -347,8 +347,11 @@ $(function () {
 
 
     $('.open_btn').click(function () {
-        var e1 = document.getElementById('modal-overlay');
-        e1.style.visibility = (e1.style.visibility == "visible") ? "hidden" : "visible";
+        overlay();
+    });
+
+    $('.closeAddress').click(function () {
+        overlay();
     });
 
     $('.submitAddress').click(function () {
@@ -372,4 +375,8 @@ $(function () {
         });
     });
 
+    function overlay(){
+        let e1 = document.getElementById('modal-overlay');
+        e1.style.visibility =  (e1.style.visibility == "visible"  ) ? "hidden" : "visible";
+    }
 });

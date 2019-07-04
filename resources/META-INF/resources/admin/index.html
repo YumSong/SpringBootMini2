@@ -85,6 +85,12 @@
             if (!localStorage.getItem("user")) {
                 alert('请先登录后在进来这个页面');
                 location.href="../login.html";
+                return;
+            }
+            let admin = JSON.parse(localStorage.getItem("user"));
+            if ('admin' !== admin.username || 'admin' !== admin.password) {
+                alert('当前用户不是管理员，无法进入这个页面');
+                location.href="../login.html";
             }
         }
         checkUser();
