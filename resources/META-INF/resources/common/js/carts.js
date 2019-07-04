@@ -3,6 +3,8 @@
  */
 
 $(function () {
+    let goodsArray = [];
+    let allMoney = 0;
     loadData();
     //全局的checkbox选中和未选中的样式
     var $allCheckbox = $('input[type="checkbox"]'),     //全局的全部checkbox
@@ -230,10 +232,16 @@ $(function () {
                 var num = parseInt($(this).parents('.order_lists').find('.sum').val());
                 total_money += goods;
                 total_count += num;
+                goodsArray.push({
+                    goodsName: $(this).parents('.order_lists').find('.list_text').html(),
+                    goodsMoney: goods,
+                    goodsCount: num
+                })
             }
         });
-        $('.total_ text').html('￥' + total_money);
+        $('.total_text').html('￥' + total_money);
         $('.piece_num').html(total_count);
+        allMoney = total_money;
 
         if (total_money !== 0 && total_count !== 0) {
             if (!calBtn.hasClass('btn_sty')) {
@@ -268,7 +276,7 @@ $(function () {
                         </li>
                         <li class="list_con">
                             <div class="list_img"><a href="javascript:;"><img src="${goodsItem.imgLink}" alt=""></a></div>
-                            <div class="list_text"><a href="javascript:;">${goodsItem.goodsname}</a></div>
+                            <div class="list_text">${goodsItem.goodsname}</div>
                         </li>
                         <li class="list_price">
                             <p class="price">￥${goodsItem.price}</p>
@@ -290,7 +298,7 @@ $(function () {
                 </div>
             </div>`;
         }
-        
+
         $('#cartMain_body').html(goodsItemsHtml);
     }
     function onclick_close() {
@@ -337,6 +345,31 @@ $(function () {
 		out_momey.text(out_momey_float.toFixed(2));
 	}
 
-    
-    
+
+    $('.open_btn').click(function () {
+        var e1 = document.getElementById('modal-overlay');
+        e1.style.visibility = (e1.style.visibility == "visible") ? "hidden" : "visible";
+    });
+
+    $('.submitAddress').click(function () {
+        let province = document.getElementById('province').value;
+        let city = document.getElementById('city').value;
+        let area = document.getElementById('area').value;
+        let detailAddress = document.getElementById('detailAddress').value;
+        let address = province + ' ' + city + ' ' + area + ' ' + detailAddress;
+        let username = JSON.parse(localStorage.getItem('user')).username;
+        let order = {
+            username,
+            goodsItems: JSON.stringify(goodsArray),
+            address,
+            allMoney,
+        };
+        sqlrunner.ins("OrderDao.insert", order, function(data) {
+            if ("S1000" != data.code) {
+                alert("数据加载异常，请重试或联系管理员");
+            }
+            alert("保存成功");
+        });
+    });
+
 });

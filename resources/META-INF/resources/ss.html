@@ -2,19 +2,69 @@
  <html>
  <head>
  	<meta charset="UTF-8">
- 	<link rel="stylesheet" type="text/css" href="css/ss.css">
-<script type="text/javascript" src="../common/js/ss.js"></script>
  	<title>搜索店内商品...</title>
+ 	<link rel="stylesheet" type="text/css" href="admin/css/grid.css" />
+<script type="text/javascript" src="../../common/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="../../common/js/vue.js"></script>
+<script type="text/javascript" src="../../common/js/utils.js"></script>
+<script>
+	$(function() {
+		var grid = loadGrid("grid", "GoodsMapper.select");
+		grid.remove = function(_id) {
+			console.info(_id);
+			sqlrunner.del("GoodsMapper.deleteById", {
+				id : _id
+			}, function(data) {
+				if ("S1000" != data.code) {
+					alert("数据加载异常，请重试或联系管理员");
+				}
+				alert("删除成功");
+				grid.loadData();
+			});
+		}
+	});
  </head>
  <body>
  
-<div class="box-top" id="top"></div>
-<div class="box-1">
-    <input type="text" class="search" id="search" placeholder="请输入搜索内容" autocomplete="off">
-</div>
-<div style="height: 1000px;background-color: #f3f3f3;"></div>
-
- 
+ <div id="grid" class="table-wrapper">
+	<table class="query-table">
+		<tr>
+			<td>名称:</td>
+			<td><input type="text" v-model="query.pName" /></td>
+			<td @click="loadData();"><button>搜索</button>
+			<td>
+		</tr>
+	</table>
+	<table class="fl-table">
+ 	<thead>
+			<tr>
+				<td>编号</td>
+				<td>名称</td>
+				<td>价格</td>
+				<td>商品图片</td>
+				<td>操作</td>
+			</tr>
+		</thead>
+ 	<tbody>
+			<tr v-for="r in rows">
+				<td>{{r.id}}</td>
+				<td>{{r.pName}}</td>
+				<td>{{r.pPrice}}</td>
+				<td><img style="width:50px;height:50px" :src="'../../visit/'+r.pImg"/></td>
+				<td><a :href="'modifyGoods.html?id='+r.id">编辑</a>
+				<a href="javascript:void(0);" @click="remove(r.id)">删除</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<table class="page-table">
+		<tr>
+			<td v-show="page.curPage != 1" @click="pre();"><button>上一页</button></td>
+			<td v-for="i in page.btns" @click="loadData(i);"><button
+					:disabled="page.curPage==i">{{i}}</button></td>
+			<td v-show="page.curPage != page.pageTotal" @click="next();"><button>下一页</button></td>
+		</tr>
+	</table>
+	<div>
 
 
  </body>

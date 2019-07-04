@@ -185,11 +185,11 @@ var sqlrunner = {
 	}
 }
 // 简单的表格
-function loadGrid(id, mapper) {
+function loadGrid(id, mapper,query) {
 	var gridVue = new Vue({
 		el : "#" + id,
 		data : {
-			query : {},
+			query : $.extend({},query),
 			rows : [],
 			page : {
 				curPage : 1,
@@ -252,3 +252,38 @@ function loadGrid(id, mapper) {
 	gridVue.loadData();
 	return gridVue;
 }
+
+function uploadImg(t, imgId,hiddenInputName,call) {
+	if (t.files.length < 1) {
+		return;
+	}
+	var wp= getWebPath();
+	var formData = new FormData();
+	formData.append('file', t.files[0]);
+	$.ajax({
+		url : wp+"uploadFile",
+		type : "post",
+		data : formData,
+		dataType : "json",
+		contentType : false,
+		processData : false,
+		mimeType : "multipart/form-data",
+		success : function(data) {
+			$("#" + imgId).attr("src", wp+"visit/" + data.data);
+			var i = $(t).next("input[name=" + hiddenInputName + "]");
+			if (i.length == 0) {
+				var a = $('<input type="hidden"/>').attr("name", hiddenInputName).attr("value", data.data);
+				$(t).after(a);
+			} else {
+				i.attr("value", data.data);
+			}
+			if (call) {
+				call(data, t);
+			}
+		},
+		error : function(data) {
+			alert("上传异常");
+		}
+	});
+}
+

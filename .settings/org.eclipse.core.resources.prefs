@@ -1,5 +1,8 @@
 eclipse.preferences.version=1
+encoding//resources/META-INF/resources/admin/css/index.css=UTF-8
+encoding//resources/META-INF/resources/admin/index.html=UTF-8
 encoding//resources/META-INF/resources/css/carts.css=UTF-8
 encoding//src/com/App.java=UTF-8
 encoding//src/com/demo/controller/SqlrunnerController.java=UTF-8
 encoding//src/com/demo/controller/UserController.java=UTF-8
+encoding/<project>=UTF-8

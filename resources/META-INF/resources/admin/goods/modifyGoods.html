@@ -7,34 +7,35 @@
 <script type="text/javascript" src="../../common/js/vue.js"></script>
 <script type="text/javascript" src="../../common/js/utils.js"></script>
 <script>
-	function loadImg(imgId,fileName,hiddenInputName) {
-		$("#" + imgId).attr("src", "../../visit/" + fileName);
-		var i = $(t).next("input[name=" + hiddenInputName + "]");
-		if (i.length == 0) {
-			var a = $('<input type="hidden"/>').attr("name", hiddenInputName).attr("value", fileName);
-			$(t).after(a);
-		} else {
-			i.attr("value", data.data);
+$(function() {
+	var _id = getQueryString("id");
+	sqlrunner.sel("GoodsMapper.select", {
+		id : _id
+	}, function(data) {
+		if ("S1000" != data.code) {
+			alert("数据加载异常，请重试或联系管理员");
 		}
-	}
-	$(function(){
-		var _id = getQueryString("id");
-		sqlrunner.sel("GoodsMapper.select", {
-			id : _id
-		}, function(data) {
-			if ("S1000" != data.code) {
-				alert("数据加载异常，请重试或联系管理员");
-			}
-			var o=data.rows[0];
-			$("#frm").fromJson(o);
-			loadImg("img1",o.pImg,"pImg");
-		});
+
+		var o = data.rows[0];
+		$("#frm").fromJson(o);
+		$("#img1").attr("src", "../../visit/" + o.pImg);
 	});
+});
+function save() {
+	var json = $("#frm").toJson();
+	sqlrunner.upd("GoodsMapper.updateById", json, function(data) {
+		if ("S1000" != data.code) {
+			alert("数据加载异常，请重试或联系管理员");
+		}
+		alert("保存成功");
+	});
+}
 </script>
 </head>
 <body>
 	<h2>商品信息</h2>
 	<form id="frm">
+		<input type="hidden" name="id"/>
 		名称：<input type="text" name="pName" /><br /> 
 		描述：<textarea name="pDesc" rows="3" cols="19"></textarea><br /> 
 		价格：<input type="text" name="pPrice" /><br /> 
@@ -42,7 +43,7 @@
 			<input type="file" onchange="uploadImg(this,'img1','pImg');" /><br /> 
 			<input type="hidden" name="pDel" value="0" /><br /> 
 			<a href="javascript:void(0);" onclick="save();" />提交</a> 
-			<a href="grid.html">返回列表</a>
+			<a href="gridGoods.html">返回列表</a>
 	</form>
 
 </body>

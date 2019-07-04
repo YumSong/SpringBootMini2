@@ -169,6 +169,28 @@
         </tbody>
     </table>
 </div>
+
+<div style="clear:both;"></div>
+    <script src="../common/js/jquery-3.4.1.min.js"> </script>
+    <script src="js/index.js"></script>
+    <script>
+        function checkUser() {
+            if (!localStorage.getItem("user")) {
+                alert('请先登录后在进来这个页面');
+                location.href="../login.html";
+            }
+        }
+        checkUser();
+        function logout(){
+            localStorage.removeItem("user");
+            location.href="../login.html"; 
+        }
+    </script>
+
+
+
+
+
 </body>
 <script>
     function addBuyCar(goodsItem) {

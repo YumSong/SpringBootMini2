@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.GoodsMapper">
+	<insert id="insert">
+    <![CDATA[
+        insert into g_goods (
+        	p_name ,
+        	p_desc ,
+        	p_img ,
+        	p_price ,
+        	p_del 
+        ) values (
+        	#{pName} ,
+        	#{pDesc} ,
+        	#{pImg} ,
+        	#{pPrice} ,
+        	#{pDel}
+        )
+    ]]>
+	</insert>
+
+	<select id="select" resultType="java.util.HashMap">
+		select id ,
+		p_name pName,
+		p_desc pDesc,
+		p_img pImg,
+		p_price pPrice,
+		p_del pDel
+		from g_goods
+		<where>
+			<if test="id !=null and id != ''">
+				and id = #{id}
+			</if>
+			<if test="pName !=null and pName != ''">
+				and p_name like concat(concat('%',#{pName}),'%')
+			</if>
+		</where>
+	</select>
+	<update id="updateById">
+		update g_goods
+		<set>
+			p_name = #{pName},
+			p_desc = #{pDesc},
+			p_img = #{pImg},
+			p_price = #{pPrice},
+			<if test="pDel !=null and pDel != ''">
+				p_del = #{pDel}
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	<delete id="deleteById">
+		delete from g_goods
+		where id = #{id}
+	</delete>
+</mapper>
+

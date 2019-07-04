@@ -2,17 +2,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>用戶列表</title>
+<title>商品列表</title>
 <link rel="stylesheet" type="text/css" href="../css/grid.css" />
+
 <script type="text/javascript" src="../../common/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="../../common/js/vue.js"></script>
 <script type="text/javascript" src="../../common/js/utils.js"></script>
 <script>
 	$(function() {
-		var grid = loadGrid("grid", "SUserDao.select");
+		var grid = loadGrid("grid", "GoodsMapper.select");
 		grid.remove = function(_id) {
 			console.info(_id);
-			sqlrunner.del("SUserDao.delete", {
+			sqlrunner.del("GoodsMapper.deleteById", {
 				id : _id
 			}, function(data) {
 				if ("S1000" != data.code) {
@@ -29,24 +30,30 @@
 	<div id="grid" class="table-wrapper">
 		<table class="query-table">
 			<tr>
-				<td>用户名:</td>
-				<td><input type="text" v-model="query.username" /></td>
+				<td>名称:</td>
+				<td><input type="text" v-model="query.pName" /></td>
 				<td @click="loadData();"><button>查詢</button>
 				<td>
 			</tr>
 		</table>
 		<table class="fl-table">
-			<tr>
-				<td>编号</td>
-				<td>用户名</td>
-				<td>操作</td>
-			</tr>
-			<tr v-for="r in rows">
-				<td>{{r.id}}</td>
-				<td>{{r.username}}</td>
-				<td><a :href="'modify.html?id='+r.id">编辑</a>
-				<a href="javascript:void(0);" @click="remove(r.id)">删除</a></td>
-			</tr>
+        	<thead>
+				<tr>
+					<td>编号</td>
+					<td>名称</td>
+					<td>价格</td>
+					<td>缩略图</td>
+				</tr>
+			</thead>
+        	<tbody>
+				<tr v-for="r in rows">
+					<td>{{r.id}}</td>
+					<td>{{r.pName}}</td>
+					<td>{{r.pPrice}}</td>
+					<td><img style="width:50px;height:50px" :src="'../../visit/'+r.pImg"/></td>
+
+				</tr>
+			</tbody>
 		</table>
 		<table class="page-table">
 			<tr>
